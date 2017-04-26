@@ -180,14 +180,14 @@ function Flatpickr(element, config) {
 			return;
 
 		self.hourElement.value = self.pad(
-			!self.config.time_24hr
+			!self.config.time24h
 				? (12 + hours) % 12 + 12 * (hours % 12 === 0)
 				: hours
 		);
 
 		self.minuteElement.value = self.pad(minutes);
 
-		if (!self.config.time_24hr)
+		if (!self.config.time24h)
 			self.amPM.textContent = hours >= 12 ? "PM" : "AM";
 
 		if (self.config.enableSeconds === true)
@@ -810,8 +810,8 @@ function Flatpickr(element, config) {
 		self.hourElement.step = self.config.hourIncrement;
 		self.minuteElement.step = self.config.minuteIncrement;
 
-		self.hourElement.min = self.config.time_24hr ? 0 : 1;
-		self.hourElement.max = self.config.time_24hr ? 23 : 12;
+		self.hourElement.min = self.config.time24h ? 0 : 1;
+		self.hourElement.max = self.config.time24h ? 23 : 12;
 
 		self.minuteElement.min = 0;
 		self.minuteElement.max = 59;
@@ -822,7 +822,7 @@ function Flatpickr(element, config) {
 		self.timeContainer.appendChild(separator);
 		self.timeContainer.appendChild(minuteInput);
 
-		if (self.config.time_24hr)
+		if (self.config.time24h)
 			self.timeContainer.classList.add("time24hr");
 
 		if (self.config.enableSeconds) {
@@ -844,7 +844,7 @@ function Flatpickr(element, config) {
 			self.timeContainer.appendChild(secondInput);
 		}
 
-		if (!self.config.time_24hr) { // add self.amPM if appropriate
+		if (!self.config.time24h) { // add self.amPM if appropriate
 			self.amPM = createElement(
 				"span",
 				"flatpickr-am-pm",
@@ -1408,7 +1408,7 @@ function Flatpickr(element, config) {
 
 	function parseConfig() {
 		let boolOpts = [
-			"utc", "wrap", "weekNumbers", "allowInput", "clickOpens", "time_24hr", "enableTime", "noCalendar", "altInput", "shorthandCurrentMonth", "inline", "static", "enableSeconds", "disableMobile"
+			"utc", "wrap", "weekNumbers", "allowInput", "clickOpens", "time24h", "enableTime", "noCalendar", "altInput", "shorthandCurrentMonth", "inline", "static", "enableSeconds", "disableMobile"
 		];
 
 		let hooks = [
@@ -2217,7 +2217,7 @@ Flatpickr.defaultConfig = {
 	clickOpens: true,
 
 	// display time picker in 24 hour mode
-	time_24hr: false,
+	time24h: false,
 
 	// enables the time picker functionality
 	enableTime: false,
